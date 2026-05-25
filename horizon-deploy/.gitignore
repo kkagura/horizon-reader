@@ -1,0 +1,9 @@
+.env
+.env.*
+logs/
+*.log
+.horizon-build/
+horizon-image.tar
+data/
+reports/
+config.production.json
