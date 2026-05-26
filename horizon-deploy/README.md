@@ -36,11 +36,12 @@ cd E:\wang\horizon-reader\horizon-deploy
 
 脚本会：
 
-- 克隆或更新 Horizon 官方仓库到 `.horizon-build/Horizon`。
+- 让 Docker 直接使用 Horizon 官方 GitHub 仓库作为远程构建上下文。
 - 使用 Horizon 官方 Dockerfile 构建镜像。
+- 应用豆包兼容补丁，避免向不支持 JSON mode 的豆包模型传 `response_format=json_object`。
 - 导出镜像为 `horizon-image.tar`。
 
-说明：Horizon 官方 Compose 配置是 `build: .`，不是直接拉取公开镜像，所以这里采用本地构建后上传镜像 tar 的方式。
+说明：Horizon 不是直接拉取公开镜像的使用方式，所以这里采用本地构建后上传镜像 tar 的方式。本地不会把 Horizon 源码纳入当前项目。
 
 ## 2. 上传到服务器
 
@@ -98,7 +99,8 @@ nano /opt/horizon-deploy/data/config.json
   "provider": "doubao",
   "model": "doubao-seed-2-0-lite-260428",
   "api_key_env": "DOUBAO_API_KEY",
-  "base_url": "https://ark.cn-beijing.volces.com/api/v3"
+  "base_url": "https://ark.cn-beijing.volces.com/api/v3",
+  "languages": ["zh"]
 }
 ```
 

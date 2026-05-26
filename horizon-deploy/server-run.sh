@@ -32,14 +32,12 @@ if [ ! -f "${DATA_DIR}/config.json" ]; then
   exit 1
 fi
 
-if ! docker image inspect "${IMAGE_NAME}" >/dev/null 2>&1; then
-  if [ ! -f "${IMAGE_TAR}" ]; then
-    echo "Docker image not found locally and tar file is missing: ${IMAGE_TAR}" >&2
-    exit 1
-  fi
-
+if [ -f "${IMAGE_TAR}" ]; then
   echo "Loading Docker image from ${IMAGE_TAR}..."
   docker load -i "${IMAGE_TAR}"
+elif ! docker image inspect "${IMAGE_NAME}" >/dev/null 2>&1; then
+  echo "Docker image not found locally and tar file is missing: ${IMAGE_TAR}" >&2
+  exit 1
 fi
 
 echo "Running Horizon for last ${HOURS} hours..."
@@ -57,4 +55,3 @@ if [ -d "${DATA_DIR}/summaries" ]; then
 else
   echo "No summary directory found: ${DATA_DIR}/summaries"
 fi
-

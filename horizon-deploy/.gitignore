@@ -7,3 +7,4 @@ horizon-image.tar
 data/
 reports/
 config.production.json
+.tmp-*.py
