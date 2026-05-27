@@ -1,0 +1,12 @@
+.git/
+.nuxt/
+.output/
+node_modules/
+horizon-deploy/horizon-image.tar
+horizon-deploy/.env
+horizon-deploy/data/
+horizon-deploy/reports/
+reader-image.tar
+*.log
+.env
+.env.*
